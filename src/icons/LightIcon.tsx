@@ -1,7 +1,7 @@
-const CloseIcon = () => {
+const LightIcon = () => {
   return (
     <svg
-      className="h-6 w-6 text-gray-800 dark:text-gray-200"
+      className="h-5 w-5 text-gray-800 dark:text-gray-200"
       fill="none"
       stroke="currentColor"
       viewBox="0 0 24 24"
@@ -10,10 +10,10 @@ const CloseIcon = () => {
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth={2}
-        d="M6 18L18 6M6 6l12 12"
+        d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
       />
     </svg>
   );
 };
 
-export default CloseIcon;
+export default LightIcon;

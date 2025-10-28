@@ -29,12 +29,12 @@ const Card: FC<ICardProps> = ({ image, index }) => {
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
           priority={index < 4}
         />
-        <div className="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-        <div className="absolute bottom-4 left-4 right-4 text-white transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 opacity-0 group-hover:opacity-100">
-          <h3 className="font-semibold text-lg mb-1 line-clamp-2">
+        <div className="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+        <div className="absolute right-4 bottom-4 left-4 translate-y-4 transform text-white opacity-0 transition-transform duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+          <h3 className="mb-1 line-clamp-2 text-lg font-semibold">
             {image.title}
           </h3>
-          <p className="text-sm text-gray-200 line-clamp-2">{image.location}</p>
+          <p className="line-clamp-2 text-sm text-gray-200">{image.location}</p>
         </div>
       </div>
     );
@@ -43,23 +43,23 @@ const Card: FC<ICardProps> = ({ image, index }) => {
   const renderCaptionSection = () => {
     return (
       <div className="p-4">
-        <h3 className="font-semibold text-gray-900 dark:text-white mb-2 line-clamp-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">
+        <h3 className="mb-2 line-clamp-2 font-semibold text-gray-900 transition-colors duration-300 group-hover:text-blue-600 dark:text-white dark:group-hover:text-blue-400">
           {image.title}
         </h3>
-        <p className="text-sm text-gray-600 dark:text-gray-300 mb-3 line-clamp-2">
+        <p className="mb-3 line-clamp-2 text-sm text-gray-600 dark:text-gray-300">
           {image.description}
         </p>
         <div className="flex flex-wrap gap-1">
           {image.tags.slice(0, 3).map((tag) => (
             <span
               key={tag}
-              className="px-2 py-1 text-xs bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-full"
+              className="rounded-full bg-gray-100 px-2 py-1 text-xs text-gray-700 dark:bg-gray-700 dark:text-gray-300"
             >
               {tag}
             </span>
           ))}
           {image.tags.length > 3 && (
-            <span className="px-2 py-1 text-xs bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-full">
+            <span className="rounded-full bg-gray-100 px-2 py-1 text-xs text-gray-700 dark:bg-gray-700 dark:text-gray-300">
               +{image.tags.length - 3}
             </span>
           )}
@@ -71,7 +71,7 @@ const Card: FC<ICardProps> = ({ image, index }) => {
   return (
     <div
       key={image.id}
-      className="group relative overflow-hidden rounded-xl bg-white dark:bg-gray-800 shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer transform hover:-translate-y-2"
+      className="group relative transform cursor-pointer overflow-hidden rounded-xl bg-white shadow-lg transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl dark:bg-gray-800"
       onClick={handleImageClick}
     >
       {renderImageSection()}
