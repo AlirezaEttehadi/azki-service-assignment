@@ -3,6 +3,8 @@
 import { type FC, type MouseEvent, type ReactNode, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 
+import cn from '@assignment/utils/style.util';
+
 interface IModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -56,14 +58,20 @@ const Modal: FC<IModalProps> = ({
 
   const modalContent = (
     <div
-      className={`fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm ${overlayClassName}`}
+      className={cn(
+        'fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm',
+        overlayClassName,
+      )}
       onClick={(event) => handleBackdropClick(event)}
       role="dialog"
       aria-modal="true"
       aria-labelledby="modal-title"
     >
       <div
-        className={`relative w-full max-w-4xl max-h-[90vh] bg-white dark:bg-gray-900 rounded-2xl shadow-2xl overflow-hidden animate-in fade-in-0 zoom-in-95 duration-300 ${className}`}
+        className={cn(
+          'animate-in fade-in-0 zoom-in-95 relative max-h-[90vh] w-full max-w-4xl overflow-hidden rounded-2xl bg-white shadow-2xl duration-300 dark:bg-gray-900',
+          className,
+        )}
         onClick={(event) => event.stopPropagation()}
       >
         {children}

@@ -5,6 +5,7 @@ import { type FC, useState } from 'react';
 
 import CloseIcon from '@assignment/icons/CloseIcon';
 import { IMockImage } from '@assignment/models/gallery.model';
+import cn from '@assignment/utils/style.util';
 
 import Modal from './Modal';
 
@@ -21,7 +22,7 @@ const ImageModal: FC<IImageModalProps> = ({ image, isOpen, onClose }) => {
     return (
       <button
         onClick={onClose}
-        className="absolute cursor-pointer top-4 right-4 z-10 p-2 rounded-full bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border border-gray-200 dark:border-gray-700 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+        className="absolute top-4 right-4 z-10 cursor-pointer rounded-full border border-gray-200 bg-white/80 p-2 shadow-lg backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:shadow-xl dark:border-gray-700 dark:bg-gray-800/80"
         aria-label="Close modal"
       >
         <CloseIcon />
@@ -31,22 +32,23 @@ const ImageModal: FC<IImageModalProps> = ({ image, isOpen, onClose }) => {
 
   const renderImageSection = () => {
     return (
-      <div className="relative flex-1 min-h-[50vh] lg:min-h-full">
-        <div className="relative w-full h-full">
+      <div className="relative min-h-[50vh] flex-1 lg:min-h-full">
+        <div className="relative h-full w-full">
           <Image
             src={image.imageUrl}
             alt={image.title}
             fill
-            className={`object-cover transition-opacity duration-500 ${
-              imageLoaded ? 'opacity-100' : 'opacity-0'
-            }`}
+            className={cn(`object-cover transition-opacity duration-500`, {
+              'opacity-100': imageLoaded,
+              'opacity-0': !imageLoaded,
+            })}
             onLoad={() => setImageLoaded(true)}
             priority
             sizes="(max-width: 1024px) 100vw, 60vw"
           />
           {!imageLoaded && (
-            <div className="absolute inset-0 bg-gray-200 dark:bg-gray-800 animate-pulse flex items-center justify-center">
-              <div className="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin" />
+            <div className="absolute inset-0 flex animate-pulse items-center justify-center bg-gray-200 dark:bg-gray-800">
+              <div className="h-8 w-8 animate-spin rounded-full border-4 border-blue-500 border-t-transparent" />
             </div>
           )}
         </div>
@@ -56,27 +58,27 @@ const ImageModal: FC<IImageModalProps> = ({ image, isOpen, onClose }) => {
 
   const renderDetailsSection = () => {
     return (
-      <div className="shrink-0 w-full lg:w-96 p-6 lg:p-8 overflow-y-auto">
+      <div className="w-full shrink-0 overflow-y-auto p-6 lg:w-96 lg:p-8">
         <div className="space-y-6">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+            <h1 className="mb-2 text-3xl font-bold text-gray-900 dark:text-white">
               {image.title}
             </h1>
-            <p className="text-lg text-gray-600 dark:text-gray-300 mb-4">
+            <p className="mb-4 text-lg text-gray-600 dark:text-gray-300">
               {image.description}
             </p>
           </div>
 
           <div className="space-y-4">
             <div>
-              <h3 className="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-2">
+              <h3 className="mb-2 text-sm font-semibold tracking-wide text-gray-500 uppercase dark:text-gray-400">
                 Location
               </h3>
               <p className="text-gray-900 dark:text-white">{image.location}</p>
             </div>
 
             <div>
-              <h3 className="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-2">
+              <h3 className="mb-2 text-sm font-semibold tracking-wide text-gray-500 uppercase dark:text-gray-400">
                 Date
               </h3>
               <p className="text-gray-900 dark:text-white">
@@ -89,7 +91,7 @@ const ImageModal: FC<IImageModalProps> = ({ image, isOpen, onClose }) => {
             </div>
 
             <div>
-              <h3 className="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-2">
+              <h3 className="mb-2 text-sm font-semibold tracking-wide text-gray-500 uppercase dark:text-gray-400">
                 Photographer
               </h3>
               <p className="text-gray-900 dark:text-white">
@@ -98,14 +100,14 @@ const ImageModal: FC<IImageModalProps> = ({ image, isOpen, onClose }) => {
             </div>
 
             <div>
-              <h3 className="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-2">
+              <h3 className="mb-2 text-sm font-semibold tracking-wide text-gray-500 uppercase dark:text-gray-400">
                 Tags
               </h3>
               <div className="flex flex-wrap gap-2">
                 {image.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="px-3 py-1 text-sm bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200 rounded-full"
+                    className="rounded-full bg-blue-100 px-3 py-1 text-sm text-blue-800 dark:bg-blue-900/30 dark:text-blue-200"
                   >
                     {tag}
                   </span>
@@ -114,10 +116,10 @@ const ImageModal: FC<IImageModalProps> = ({ image, isOpen, onClose }) => {
             </div>
           </div>
 
-          <div className="pt-4 border-t border-gray-200 dark:border-gray-700">
+          <div className="border-t border-gray-200 pt-4 dark:border-gray-700">
             <button
               onClick={onClose}
-              className="w-full px-6 py-3 cursor-pointer bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900"
+              className="w-full cursor-pointer rounded-lg bg-blue-600 px-6 py-3 font-semibold text-white transition-colors duration-300 hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none dark:focus:ring-offset-gray-900"
             >
               Back to Gallery
             </button>
@@ -131,7 +133,7 @@ const ImageModal: FC<IImageModalProps> = ({ image, isOpen, onClose }) => {
     <Modal isOpen={isOpen} onClose={onClose} className="max-w-6xl">
       {renderCloseButton()}
 
-      <div className="flex flex-col lg:flex-row h-full max-h-[90vh]">
+      <div className="flex h-full max-h-[90vh] flex-col lg:flex-row">
         {renderImageSection()}
         {renderDetailsSection()}
       </div>
