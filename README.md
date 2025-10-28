@@ -1,5 +1,7 @@
 # 🖼️ Azki Service - Image Gallery
 
+> **🌐 Live Demo**: [https://azki-service-assignment.vercel.app/](https://azki-service-assignment.vercel.app/)
+
 A modern, responsive image gallery built with Next.js 16, featuring a beautiful UI with dark/light theme support, image preloading, and smooth modal interactions.
 
 ## ✨ Features
